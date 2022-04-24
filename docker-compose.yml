@@ -1,0 +1,21 @@
+version: "3.3"
+services:
+  saludar-service:
+    image: saludar-service
+    ports:
+      - "8080:8080"
+    networks:
+      - saludos-mysql
+    depends_on:
+      - mysqldb
+ 
+  mysqldb:
+    image: mysql:8
+    networks:
+      - saludos-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=saludos_22
+
+networks:
+  saludos-mysql:
