@@ -8,10 +8,10 @@ services:
     volumes:
       - ./init.sql:/data/application/init.sql 
     environment:
-      - MYSQL_ROOT_USER: 789xx
+      - MYSQL_ROOT_USER: "789xx"
       - MYSQL_ROOT_PASSWORD: 123456
       - MYSQL_DATABASE: saludos_22
-      - MYSQL_USER: 789xx
+      - MYSQL_USER: "789xx"
       - MYSQL_PASSWORD: 123456
  
   saludar-service:
