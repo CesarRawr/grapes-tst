@@ -1,5 +1,16 @@
 version: "3.3"
-services:
+  services:
+    mysqldb:
+    image: mysql:8
+    networks:
+      - saludos-mysql
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql 
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=saludos_22
+
   saludar-service:
     image: saludar-service
     build:
@@ -11,17 +22,6 @@ services:
       - saludos-mysql
     depends_on:
       - mysqldb
- 
-  mysqldb:
-    image: mysql:8
-    networks:
-      - saludos-mysql
-    command: --init-file /data/application/init.sql
-    volumes:
-      - ./init.sql:/data/application/init.sql 
-    environment:
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=saludos_22
 
 networks:
   saludos-mysql:
