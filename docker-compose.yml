@@ -2,6 +2,9 @@ version: "3.3"
 services:
   saludar-service:
     image: saludar-service
+    build:
+      context: ./SaludarService
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     networks:
