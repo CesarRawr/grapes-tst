@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./init.sql:/data/application/init.sql
     networks:
       - saludos-mysql
     depends_on:
