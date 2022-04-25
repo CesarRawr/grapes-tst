@@ -1,17 +1,14 @@
 version: "3.3"
 services:
   mysqldb:
-    image: mysql:8
+    image: mariadb
     networks:
       - saludos-mysql
-    command: --init-file /data/application/init.sql
+    command: --init-file /docker-entrypoint-initdb.d/bd.sql
     volumes:
-      - ./init.sql:/data/application/init.sql 
+      - ./bd.sql:/docker-entrypoint-initdb.d/bd.sql
     environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: saludos_22
-      MYSQL_USER: 789xx
-      MYSQL_PASSWORD: 123456
+      - MARIADB_ROOT_PASSWORD: 123456
  
   saludar-service:
     image: saludar-service
@@ -20,6 +17,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    environment:
+      MYSQL_HOST: saludos-mysql
     networks:
       - saludos-mysql
     depends_on:
